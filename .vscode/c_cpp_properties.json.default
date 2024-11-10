@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/src/**/",
+                "${workspaceFolder}/build/**"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "defines": [],
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+            // "configurationProvider": "llvm-vs-code-extensions.vscode-clangd"
+        }
+    ],
+    "version": 4
+}
