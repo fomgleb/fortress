@@ -3,6 +3,9 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <unistd.h>
+#include <array>
+#include <system_error>
+#include <vector>
 
 Server::Server(uint16_t port, std::string& error_message)
 {
@@ -44,10 +47,42 @@ void Server::WaitForConnection(std::string& error_message)
     }
 }
 
-std::string Server::Receive(std::string& error_message)
+ssize_t Server::ReceiveBytes(char* buffer, size_t length) const
 {
-    static const int buffer_len = 500;
-    char buffer[buffer_len];
-    recv(client_socket_, buffer, buffer_len, 0);
-    return std::string(buffer);
+    // error.clear();
+
+    char* data_ptr = buffer;
+
+    ssize_t number_of_left_bytes = static_cast<ssize_t>(length);
+    while (number_of_left_bytes > 0) {
+        ssize_t received_bytes_count = recv(client_socket_, data_ptr, static_cast<size_t>(number_of_left_bytes), 0);
+        if (received_bytes_count < 0) {
+            if (errno == EINTR) {
+                continue;
+            }
+            // error = std::error_code(errno, std::generic_category());
+            return -1; // Error encountered
+        }
+        if (received_bytes_count == 0) {
+            // Connection closed, return data received so far
+            return static_cast<ssize_t>(length) - number_of_left_bytes;
+        }
+
+        data_ptr += received_bytes_count;
+        number_of_left_bytes -= received_bytes_count;
+    }
+
+    return 0;
+}
+
+std::string Server::ReceiveString(size_t length) const
+{
+    std::string received_string(length + 1, '\0'); // Pre-allocate string with the desired length
+
+    size_t number_of_left_bytes = length;
+    char* data_ptr = received_string.data();
+
+    ReceiveBytes(data_ptr, length);
+
+    return received_string;
 }

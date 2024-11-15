@@ -1,5 +1,6 @@
 #include <iostream>
 #include "pugixml.hpp"
+#include "request_receiver.hpp"
 #include "sockets.hpp"
 
 int main()
@@ -10,9 +11,11 @@ int main()
     std::cout << erorr_message << std::endl;
     server.WaitForConnection(erorr_message);
     std::cout << erorr_message << std::endl;
-    std::string message = server.Receive(erorr_message);
-    std::cout << erorr_message << std::endl;
-    std::cout << "message = \"" << message << "\"" << std::endl;
+
+    ErrorCode error;
+    RawRequest received_request = ReceiveRequest(server, error).value();
+
+    std::cout << "Received request: " << received_request.xml_string << std::endl;;
 
     return 0;
 }
