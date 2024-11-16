@@ -1,7 +1,7 @@
 #include <iostream>
 #include "pugixml.hpp"
 #include "request_receiver.hpp"
-#include "sockets.hpp"
+#include "server.hpp"
 
 int main()
 {
@@ -15,7 +15,7 @@ int main()
     ErrorCode error;
     RawRequest received_request = ReceiveRequest(server, error).value();
 
-    std::cout << "Received request: " << received_request.xml_string << std::endl;;
+    std::cout << "Received request: " << received_request.xml_string << std::endl;
 
     return 0;
 }

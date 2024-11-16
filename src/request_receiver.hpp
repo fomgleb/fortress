@@ -3,7 +3,7 @@
 
 #include <optional>
 #include <string>
-#include "sockets.hpp"
+#include "server.hpp"
 
 enum class ErrorCode {
     NO_ERRORS,

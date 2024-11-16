@@ -1,7 +1,7 @@
-#ifndef FORTRESS_SOCKETS_IMPL_HPP_
-#define FORTRESS_SOCKETS_IMPL_HPP_
+#ifndef FORTRESS_SERVER_IMPL_HPP_
+#define FORTRESS_SERVER_IMPL_HPP_
 
-#include "sockets.hpp"
+#include "server.hpp"
 
 #include <arpa/inet.h>
 
@@ -26,4 +26,4 @@ T Server::Receive() const
     }
 }
 
-#endif // FORTRESS_SOCKETS_IMPL_HPP_
+#endif // FORTRESS_SERVER_IMPL_HPP_

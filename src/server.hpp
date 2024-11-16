@@ -1,5 +1,5 @@
-#ifndef FORTRESS_SOCKETS_HPP_
-#define FORTRESS_SOCKETS_HPP_
+#ifndef FORTRESS_SERVER_HPP_
+#define FORTRESS_SERVER_HPP_
 
 #include <string>
 #include <system_error>
@@ -21,6 +21,6 @@ class Server {
     ssize_t ReceiveBytes(char* buffer, size_t length) const;
 };
 
-#include "sockets_impl.hpp"
+#include "server_impl.hpp"
 
-#endif // FORTRESS_SOCKETS_HPP_
+#endif // FORTRESS_SERVER_HPP_
