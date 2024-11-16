@@ -86,3 +86,8 @@ std::string Server::ReceiveString(size_t length) const
 
     return received_string;
 }
+
+void Server::SendString(const std::string& str) const
+{
+    send(client_socket_, str.c_str(), str.size(), 0);
+}

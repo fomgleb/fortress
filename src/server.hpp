@@ -12,7 +12,10 @@ class Server {
     void WaitForConnection(std::string& error_message);
     template <typename T>
     T Receive() const;
+    template <typename T>
+    void Send(T data) const;
     std::string ReceiveString(size_t length) const;
+    void SendString(const std::string& str) const;
 
   private:
     int connection_socket_;
