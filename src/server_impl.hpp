@@ -15,7 +15,6 @@ T Server::Receive() const
     size_t data_size = sizeof(T);
 
     if (ReceiveBytes(reinterpret_cast<char*>(&received_value), data_size) != 0) {
-        std::cout << "\n CONNECTION CLOSED \n";
         return T{}; // Return default value if the receive fails
     }
 
