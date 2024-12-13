@@ -2,7 +2,9 @@
 #include "pugixml.hpp"
 #include "request_receiver.hpp"
 #include "server.hpp"
+#include "parser.hpp"
 
+/*
 void processRequest(const std::string& xml)
 {
     pugi::xml_document doc;
@@ -46,6 +48,7 @@ void processRequest(const std::string& xml)
         std::cerr << "Unknown action: " << action << std::endl;
     }
 }
+*/
 
 int main()
 {
