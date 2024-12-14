@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include <queue>
+#include <iostream>
 
 class FunctionalBlock {
 protected:
@@ -28,7 +29,7 @@ public:
         return cnfReqQueue;
     }
     virtual void process() = 0;
-    virtual void hand_over_in(std::string in, std::string out);
+    virtual void hand_over_in(std::string in, std::string out) = 0;
     std::string getName() const { return name; }
 };
 
@@ -65,7 +66,7 @@ public:
     APPEND_STRING(const std::string& blockName) : FunctionalBlock(blockName) {}
     void process() override {
         OUT = IN_1 + IN_2;
-        std::cout << "\n######" << OUT << '\n';
+        std::cout << "String: " << OUT << '\n';
         add_process();
     }
         void hand_over_in(std::string in, std::string out) override {

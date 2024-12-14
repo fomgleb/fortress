@@ -1,8 +1,8 @@
 #include <iostream>
+#include "parser.hpp"
 #include "pugixml.hpp"
 #include "request_receiver.hpp"
 #include "server.hpp"
-#include "parser.hpp"
 
 /*
 void processRequest(const std::string& xml)
@@ -68,9 +68,6 @@ int main()
             break;
         }
 
-        std::cout << "Received request: " << received_request.xml_string << '\n';
-        processRequest(received_request.xml_string);
-        
         pugi::xml_document doc;
         pugi::xml_parse_result result = doc.load_string(received_request.xml_string.c_str());
 
@@ -91,6 +88,9 @@ int main()
         std::cout << "Sent response: " << respose << '\n';
 
         std::cout << "\n\n";
+
+        std::cout << "Received request: " << received_request.xml_string << '\n';
+        processRequest(received_request.xml_string);
     }
 
     return 0;

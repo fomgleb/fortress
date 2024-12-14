@@ -94,10 +94,12 @@ void processRequest(const std::string& xml) {
             if (blockMap.find(blockName) != blockMap.end()) {
                 std::vector<std::string> req = blockMap[blockName].get()->returnReq();
                 for (size_t i = 0; i < req.size(); i++) {
-                    cnfReqQueue.push(req[i]);
+                    if (cnfReqQueue.empty() || cnfReqQueue.front() != req[i]) {
+                        cnfReqQueue.push(req[i]);
+                    }
                 }
                 blockMap[blockName]->process();
-            }
+            } 
         }
     }
     else {
