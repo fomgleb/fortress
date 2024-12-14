@@ -36,6 +36,7 @@ public:
         OUT = IN;
         add_process();
     }
+    std::string show() {return IN;}
 };
 
 class APPEND_STRING : public FunctionalBlock {

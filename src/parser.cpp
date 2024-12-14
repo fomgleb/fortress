@@ -63,7 +63,7 @@ void processRequest(const std::string& xml) {
         }
     }
     else if (action == "WRITE") {
-        pugi::xml_node connection = request.child("Conection");
+        pugi::xml_node connection = request.child("Connection");
         if (connection) {
             std::string source = connection.attribute("Source").as_string();
             std::string destination = connection.attribute("Destination").as_string();
@@ -73,16 +73,9 @@ void processRequest(const std::string& xml) {
             if (pos != std::string::npos) {
                 std::string blockName = destination.substr(0, pos);
                 std::string out = destination.substr(pos + 1);
-
-                if (blockMap.find(blockName) != blockMap.end() && blockMap.find(source) != blockMap.end()) {
-                    blockMap[blockName]->addNextBlock(blockMap[source], out);
-                    if (out == "CNF") {
-                        cnfReqQueue.push(blockName);
-                    }
-                }
-                else {
-                    std::cerr << "Source or destination block not found in blockMap" << std::endl;
-                }
+                
+                static_cast<STRING2STRING*>(blockMap[blockName].get())->setValue(source);
+                std::cout << static_cast<STRING2STRING*>(blockMap[blockName].get())->show() << '\n';
             }
         }
         else {
