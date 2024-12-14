@@ -2,6 +2,7 @@
 #define FORTRESS_SERVER_HPP_
 
 #include <string>
+#include <cstdint>
 #include <system_error>
 
 class Server {

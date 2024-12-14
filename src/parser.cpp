@@ -1,12 +1,9 @@
-#include "functional_block.hpp"
 #include "parser.hpp"
 #include <iostream>
-#include <unordered_map>
-#include <queue>
-#include <memory>
+#include <pugixml.hpp>
 
-extern std::unordered_map<std::string, std::shared_ptr<FunctionalBlock>> blockMap;
-extern std::queue<std::string> cnfReqQueue;
+std::unordered_map<std::string, std::shared_ptr<FunctionalBlock>> blockMap;
+std::queue<std::string> cnfReqQueue;
 
 void processRequest(const std::string& xml) {
     pugi::xml_document doc;

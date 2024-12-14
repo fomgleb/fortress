@@ -2,8 +2,10 @@
 #define FORTRESS_PARSER_HPP_
 
 #include <string>
-#include <vector>
-#include "pugixml.hpp"
+#include <unordered_map>
+#include <queue>
+#include <memory>
+#include "functional_block.hpp"
 
 void processRequest(const std::string& xml);
 
