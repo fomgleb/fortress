@@ -13,7 +13,7 @@ private:
     std::vector<std::string> nextOuts;
 
 public:
-    FunctionalBlock(const std::string& name) : name(name), counter(0) {}
+    FunctionalBlock(const std::string& blockName) : name(blockName), counter(0) {}
     virtual ~FunctionalBlock() {}
     void add_process() { counter++; }
     void addNextBlock(std::shared_ptr<FunctionalBlock> block, const std::string& out) {
@@ -30,7 +30,7 @@ private:
     std::string OUT;
 
 public:
-    STRING2STRING(const std::string& name) : FunctionalBlock(name) {}
+    STRING2STRING(const std::string& blockName) : FunctionalBlock(blockName) {}
     void setValue(const std::string& value) { IN = value; }
     void process() override {
         OUT = IN;
@@ -45,7 +45,7 @@ private:
     std::string OUT;
 
 public:
-    APPEND_STRING(const std::string& name) : FunctionalBlock(name) {}
+    APPEND_STRING(const std::string& blockName) : FunctionalBlock(blockName) {}
     void process() override {
         OUT = IN_1 + IN_2;
         add_process();
