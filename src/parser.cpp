@@ -68,6 +68,7 @@ void processRequest(const std::string& xml) {
         pugi::xml_node connection = request.child("Connection");
         if (connection) {
             std::string source = connection.attribute("Source").as_string();
+            source = source.substr(1, source.size() - 2);
             std::string destination = connection.attribute("Destination").as_string();
             std::cout << "Connection Source: " << source << ", Destination: " << destination << std::endl;
 

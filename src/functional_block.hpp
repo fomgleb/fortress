@@ -4,9 +4,10 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <iostream>
 
 class FunctionalBlock {
-private:
+protected:
     std::string name;
     uint64_t counter;
     std::vector<std::shared_ptr<FunctionalBlock>> nextBlocks;
@@ -21,7 +22,7 @@ public:
         nextOuts.push_back(out);
     }
     virtual void process() = 0;
-    virtual void hand_over_in(std::string in, std::string out);
+    virtual void hand_over_in(std::string in, std::string out) = 0;
     std::string getName() const { return name; }
 };
 
@@ -36,6 +37,9 @@ public:
     void process() override {
         OUT = IN;
         add_process();
+        for (size_t i = 0; i < nextBlocks.size(); i++) {
+            nextBlocks[i].get()->hand_over_in(nextOuts[i], OUT);
+        }
     }
     void hand_over_in(std::string in, std::string out) override {
         if (in == "IN"){
@@ -55,6 +59,7 @@ public:
     APPEND_STRING(const std::string& blockName) : FunctionalBlock(blockName) {}
     void process() override {
         OUT = IN_1 + IN_2;
+        std::cout << "\n######" << OUT << '\n';
         add_process();
     }
         void hand_over_in(std::string in, std::string out) override {
@@ -76,6 +81,9 @@ private:
 public:
     START(const std::string& blockName) : FunctionalBlock(blockName) {}
     void process() override {
+        WARM = "";
+    }
+    void hand_over_in(std::string in, std::string out) override {
         WARM = "";
     }
 };
