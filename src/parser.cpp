@@ -29,11 +29,14 @@ void processRequest(const std::string& xml) {
             std::string name = fb.attribute("Name").as_string();
             std::string type = fb.attribute("Type").as_string();
             std::cout << "FB Name: " << name << ", Type: " << type << std::endl;
-
-            if (type == "STRING2STRING") {
+            
+            if (type == "EMB_RES"){
+                blockMap["START"] = std::make_shared<START>("START");
+            }
+            else if (type == "STRING2STRING") {
                 blockMap[name] = std::make_shared<STRING2STRING>(name);
             }
-            else if (type == "APPEND_STRING") {
+            else if (type == "APPEND_STRING_2") {
                 blockMap[name] = std::make_shared<APPEND_STRING>(name);
             }
         }
@@ -42,7 +45,7 @@ void processRequest(const std::string& xml) {
         }
     }
     else if (action == "WRITE" || action == "CREATE") {
-        pugi::xml_node connection = request.child("Connection");
+        pugi::xml_node connection = request.child("Conection");
         if (connection) {
             std::string source = connection.attribute("Source").as_string();
             std::string destination = connection.attribute("Destination").as_string();

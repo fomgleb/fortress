@@ -52,4 +52,17 @@ public:
     }
 };
 
+class START : public FunctionalBlock {
+private:
+    std::string COLD;
+    std::string WARM;
+    std::string STOP;
+
+public:
+    START(const std::string& blockName) : FunctionalBlock(blockName) {}
+    void process() override {
+        WARM = "";
+    }
+};
+
 #endif /* FORTRESS_FUNCTIONAL_BLOCK_HPP_ */
