@@ -2,15 +2,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug App",
+      "name": "RUN DEBUG",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/main_app",
+      "program": "${workspaceFolder}/build/src/main_app",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
-      "externalConsole": true,
+      "externalConsole": false,
       "MIMode": "gdb",
       "setupCommands": [
         {
@@ -24,7 +24,7 @@
           "ignoreFailures": true
         }
       ],
-      "preLaunchTask": "Build app"
+      "preLaunchTask": "BUILD DEBUG"
     }
   ]
 }

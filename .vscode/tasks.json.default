@@ -1,38 +1,23 @@
 {
   "tasks": [
     {
-      "label": "Configure",
+      "label": "CONFIGURE DEBUG",
       "type": "shell",
-      "command": "cmake",
-      "args": [
-        "-B",
-        "${workspaceFolder}/build",
-        "-DCMAKE_BUILD_TYPE=Debug"
-      ]
+      "command": "cmake -B ${workspaceFolder}/build -DCMAKE_BUILD_TYPE=Debug",
     },
     {
-      "label": "Build app",
+      "label": "BUILD DEBUG",
       "type": "shell",
-      "command": "cmake",
-      "args": [
-        "--build",
-        "${workspaceFolder}/build",
-        "--config",
-        "Debug",
-        "--target",
-        "main_app",
-        "-j",
-        "12"
-      ],
+      "command": "cmake --build ${workspaceFolder}/build --config Debug --target main_app -j 8",
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       },
       "problemMatcher": [
         "$gcc"
       ],
       "dependsOn": [
-        "Configure"
+        "CONFIGURE DEBUG"
       ]
     }
   ],
