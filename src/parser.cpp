@@ -32,6 +32,7 @@ void processRequest(const std::string& xml) {
             
             if (type == "EMB_RES"){
                 blockMap["START"] = std::make_shared<START>("START");
+                cnfReqQueue.push("START");
             }
             else if (type == "STRING2STRING") {
                 blockMap[name] = std::make_shared<STRING2STRING>(name);
@@ -45,17 +46,18 @@ void processRequest(const std::string& xml) {
             std::string destination = child.attribute("Destination").as_string();
             std::cout << "Connection Source: " << source << ", Destination: " << destination << std::endl;
 
-            size_t pos = destination.find('.');
-            if (pos != std::string::npos) {
-                std::string blockName = destination.substr(0, pos);
-                std::string out = destination.substr(pos + 1);
+            size_t destinationDotIndex = destination.find('.');
+            std::string destinationBlockName = destination.substr(0, destinationDotIndex);
+            std::string destinationOut = destination.substr(destinationDotIndex + 1);
 
-                if (blockMap.find(blockName) != blockMap.end() && blockMap.find(source) != blockMap.end()) {
-                    blockMap[blockName]->addNextBlock(blockMap[source], out);
-                }
-                else {
-                    std::cerr << "Source or destination block not found in blockMap" << std::endl;
-                }
+            size_t sourceDotIndex = source.find('.');
+            std::string sourceBlockName = source.substr(0, sourceDotIndex);
+            std::string sourceOut = source.substr(sourceDotIndex + 1);
+
+            if (destinationOut == "REQ") {
+                cnfReqQueue.push(destinationBlockName);
+            } else {
+                blockMap[sourceBlockName].get()->addNextBlock(blockMap[destinationBlockName], destinationOut);
             }
         }
         else {
