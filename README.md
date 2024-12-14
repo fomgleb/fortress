@@ -1,4 +1,4 @@
-# Fortress by Mega Fomenko & Telenkov
+# Fortress
 
 Forte is a project developed by Mega Fomenko and Telenkov. This README file will guide you through the process of downloading, installing, and running the project.
 
