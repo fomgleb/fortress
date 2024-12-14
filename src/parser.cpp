@@ -23,11 +23,11 @@ void processRequest(const std::string& xml) {
     std::string action = request.attribute("Action").as_string();
     std::cout << "Action: " << action << std::endl;
 
-    if (action == "QUERY" || action == "CREATE") {
-        pugi::xml_node fb = request.child("FB");
-        if (fb) {
-            std::string name = fb.attribute("Name").as_string();
-            std::string type = fb.attribute("Type").as_string();
+    if (action == "CREATE") {
+        pugi::xml_node child = request.first_child();
+        if (std::string(child.name()) == "FB") {
+            std::string name = child.attribute("Name").as_string();
+            std::string type = child.attribute("Type").as_string();
             std::cout << "FB Name: " << name << ", Type: " << type << std::endl;
             
             if (type == "EMB_RES"){
@@ -40,11 +40,29 @@ void processRequest(const std::string& xml) {
                 blockMap[name] = std::make_shared<APPEND_STRING>(name);
             }
         }
+        else if (std::string(child.name()) == "Connection") {
+            std::string source = child.attribute("Source").as_string();
+            std::string destination = child.attribute("Destination").as_string();
+            std::cout << "Connection Source: " << source << ", Destination: " << destination << std::endl;
+
+            size_t pos = destination.find('.');
+            if (pos != std::string::npos) {
+                std::string blockName = destination.substr(0, pos);
+                std::string out = destination.substr(pos + 1);
+
+                if (blockMap.find(blockName) != blockMap.end() && blockMap.find(source) != blockMap.end()) {
+                    blockMap[blockName]->addNextBlock(blockMap[source], out);
+                }
+                else {
+                    std::cerr << "Source or destination block not found in blockMap" << std::endl;
+                }
+            }
+        }
         else {
-            std::cerr << "FB element not found" << std::endl;
+            std::cerr << "FB or Connection element not found" << std::endl;
         }
     }
-    else if (action == "WRITE" || action == "CREATE") {
+    else if (action == "WRITE") {
         pugi::xml_node connection = request.child("Conection");
         if (connection) {
             std::string source = connection.attribute("Source").as_string();
