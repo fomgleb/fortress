@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include <iostream>
+#include <queue>
 
 class FunctionalBlock {
 protected:
@@ -12,7 +12,7 @@ protected:
     uint64_t counter;
     std::vector<std::shared_ptr<FunctionalBlock>> nextBlocks;
     std::vector<std::string> nextOuts;
-
+    std::vector<std::string> cnfReqQueue;
 public:
     FunctionalBlock(const std::string& blockName) : name(blockName), counter(0) {}
     virtual ~FunctionalBlock() {}
@@ -21,8 +21,14 @@ public:
         nextBlocks.push_back(block);
         nextOuts.push_back(out);
     }
+    void addReq(std::string cnfreq){
+        cnfReqQueue.push_back(cnfreq);
+    }
+    std::vector<std::string> returnReq(){
+        return cnfReqQueue;
+    }
     virtual void process() = 0;
-    virtual void hand_over_in(std::string in, std::string out) = 0;
+    virtual void hand_over_in(std::string in, std::string out);
     std::string getName() const { return name; }
 };
 

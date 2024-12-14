@@ -55,7 +55,7 @@ void processRequest(const std::string& xml) {
             std::string sourceOut = source.substr(sourceDotIndex + 1);
 
             if (destinationOut == "REQ") {
-                cnfReqQueue.push(destinationBlockName);
+                blockMap[sourceBlockName].get()->addReq(destinationBlockName);
             } else {
                 blockMap[sourceBlockName].get()->addNextBlock(blockMap[destinationBlockName], destinationOut);
             }
@@ -92,6 +92,10 @@ void processRequest(const std::string& xml) {
             std::string blockName = cnfReqQueue.front();
             cnfReqQueue.pop();
             if (blockMap.find(blockName) != blockMap.end()) {
+                std::vector<std::string> req = blockMap[blockName].get()->returnReq();
+                for (size_t i = 0; i < req.size(); i++) {
+                    cnfReqQueue.push(req[i]);
+                }
                 blockMap[blockName]->process();
             }
         }
