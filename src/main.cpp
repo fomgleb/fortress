@@ -89,6 +89,8 @@ int main()
         server.Send<uint16_t>(respose.size());
         server.SendString(respose);
         std::cout << "Sent response: " << respose << '\n';
+
+        std::cout << "\n\n";
     }
 
     return 0;
