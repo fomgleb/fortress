@@ -1,6 +1,8 @@
 #include "parser.hpp"
 #include <iostream>
 #include <pugixml.hpp>
+#include <string2string.hpp>
+#include <append_string_2.hpp>
 
 std::unordered_map<std::string, std::shared_ptr<FunctionalBlock>> blockMap;
 std::queue<std::string> cnfReqQueue;
