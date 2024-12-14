@@ -21,6 +21,7 @@ public:
         nextOuts.push_back(out);
     }
     virtual void process() = 0;
+    virtual void hand_over_in(std::string in, std::string out);
     std::string getName() const { return name; }
 };
 
@@ -36,6 +37,11 @@ public:
         OUT = IN;
         add_process();
     }
+    void hand_over_in(std::string in, std::string out) override {
+        if (in == "IN"){
+            IN = out;
+        }
+    }
     std::string show() {return IN;}
 };
 
@@ -50,6 +56,14 @@ public:
     void process() override {
         OUT = IN_1 + IN_2;
         add_process();
+    }
+        void hand_over_in(std::string in, std::string out) override {
+        if (in == "IN_1"){
+            IN_1 = out;
+        }
+        else if(in == "IN_2"){
+            IN_2 = out;
+        }
     }
 };
 
