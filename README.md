@@ -3,10 +3,12 @@
 Fortress is a project developed by fomgleb and Logar1t. This README file will guide you through the process of downloading, installing, and running the project.
 
 ## Overview
+
 Fortress is an analog of Forte and works with 4diac as an execution environment. It provides tools for creating and running programs written in the IEC 61131-3 language.
 
 ## Functional Blocks
-Fortress includes various functional blocks that can be used to create complex logical schemes. Let's look at two of them: STRING2STRING and APPEND_STRING_2.
+
+Fortress includes a total of two functional blocks that can be used to create complex logical schema: STRING 2 STRING and APPEND STRING 2 blocks.
 
 ## Download
 
@@ -49,4 +51,5 @@ To run the project, use the following command:
 ```sh
 ./build/src/main_app
 ```
+
 This will start the Fortress application, allowing you to utilize its functional blocks and integrate with 4diac for executing your industrial automation programs.
