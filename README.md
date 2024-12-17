@@ -8,7 +8,7 @@ Fortress is an analog of Forte and works with 4diac as an execution environment.
 
 ## Functional Blocks
 
-Fortress includes a total of two functional blocks that can be used to create complex logical schema: STRING 2 STRING and APPEND STRING 2 blocks.
+Fortress includes a total of two functional blocks that can be used to create complex logical schema: STRING2STRING and APPEND_STRING_2 blocks.
 
 ## Download
 
