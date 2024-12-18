@@ -27,9 +27,3 @@ std::string FunctionalBlock::getName() const
 {
     return name;
 }
-
-START::START(const std::string& blockName) : FunctionalBlock(blockName) {}
-
-void START::process() {}
-
-void START::hand_over_in(std::string in, std::string out) {}

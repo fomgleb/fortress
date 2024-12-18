@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <queue>
 #include <memory>
-#include "functional_block.hpp"
+#include "functional_blocks/functional_block.hpp"
 
 void processRequest(const std::string& xml);
 
