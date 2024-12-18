@@ -46,10 +46,12 @@ To install and build the project, follow these steps:
 
 ## Usage
 
-To run the project, use the following command:
+1. To run the project, use the following command:
 
 ```sh
 ./build/src/main_app
 ```
+2. After starting Fortress you need to start 4diac-ide.
 
-This will start the Fortress application, allowing you to utilize its functional blocks and integrate with 4diac for executing your industrial automation programs.
+3. Next Click the "Deploy" button to deploy the project.
+
